@@ -4,6 +4,7 @@ docker run -d --network some-network --name mongodb \
 	-e MONGO_INITDB_ROOT_PASSWORD=password \
 -v mongo-data:/data/db \
 	mongo
+-------------
 # mongo-express
 docker run -d \
     --network some-network \
@@ -15,10 +16,22 @@ docker run -d \
     -e ME_CONFIG_BASICAUTH_USERNAME="admin" \
     -e ME_CONFIG_BASICAUTH_PASSWORD="pass123" \
     mongo-express
-
+------------------
 # to reset it 
-
 docker rm -f mongodb
 docker volume rm mongo-data
 # then start MongoDB again with your env vars
+---------------------------
+## 1. Create macvlan
+sudo ip link add macvlan0 link enX0 type macvlan mode bridge
 
+# 2. Assign a valid IP
+sudo ip addr add 192.168.1.100/24 dev macvlan0
+
+# 3. Bring it up
+sudo ip link set macvlan0 up
+
+# 4. Verify
+ip link show
+ip addr show macvlan0
+----------------------
