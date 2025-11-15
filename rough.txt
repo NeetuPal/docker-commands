@@ -1,5 +1,5 @@
 # mongo
-docker run -d --network some-network --name some-mongo \
+docker run -d --network some-network --name mongodb \
 	-e MONGO_INITDB_ROOT_USERNAME=root \
 	-e MONGO_INITDB_ROOT_PASSWORD=Test@123 \
 -v mongo-data:/data/db \
