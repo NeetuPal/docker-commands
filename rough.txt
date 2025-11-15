@@ -35,3 +35,11 @@ sudo ip link set macvlan0 up
 ip link show
 ip addr show macvlan0
 ----------------------
+the correct full syntax for creating a Macvlan network:
+
+docker network create -d macvlan \
+  --subnet=192.168.1.0/24 \
+  --gateway=192.168.1.1 \
+  -o parent=enX0 \
+  macvlan-net
+------------
